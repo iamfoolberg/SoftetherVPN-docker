@@ -12,11 +12,12 @@ RUN mkdir /usr/local/src && apk add binutils --no-cache\
 
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so
 WORKDIR /usr/local/src
-RUN git clone https://github.com/SoftEtherVPN/SoftEtherVPN.git
-#RUN git clone -b ${GIT_TAG} https://github.com/SoftEtherVPN/SoftEtherVPN.git
-#remove the region restriction.
-sed -i 's/region, "JP"/region, "JX"/g' SoftEtherVPN/src/Cedar/Server.c
+RUN git clone https://github.com/SoftEtherVPN/SoftEtherVPN.git \
+sed -i 's/region, "JP"/region, "JX"/g' SoftEtherVPN/src/Cedar/Server.c \
 sed -i 's/region, "CN"/region, "CX"/g' SoftEtherVPN/src/Cedar/Server.c
+#remove the region restriction.
+
+#RUN git clone -b ${GIT_TAG} https://github.com/SoftEtherVPN/SoftEtherVPN.git
 ENV USE_MUSL=YES
 RUN cd SoftEtherVPN &&\
 	git submodule init &&\

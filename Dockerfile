@@ -1,5 +1,5 @@
 FROM alpine AS builder
-RUN mkdir /usr/local/src && apk add binutils --no-cache\
+RUN mkdir /usr/local/src && apk add binutils --no-cache \
         build-base \
         readline-dev \
         openssl-dev \
@@ -13,8 +13,8 @@ RUN mkdir /usr/local/src && apk add binutils --no-cache\
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so
 WORKDIR /usr/local/src
 RUN git clone https://github.com/SoftEtherVPN/SoftEtherVPN.git \
-sed -i 's/region, "JP"/region, "JX"/g' SoftEtherVPN/src/Cedar/Server.c \
-sed -i 's/region, "CN"/region, "CX"/g' SoftEtherVPN/src/Cedar/Server.c
+	&& sed -i 's/region, "JP"/region, "JX"/g' SoftEtherVPN/src/Cedar/Server.c \
+	&& sed -i 's/region, "CN"/region, "CX"/g' SoftEtherVPN/src/Cedar/Server.c
 #remove the region restriction.
 
 #RUN git clone -b ${GIT_TAG} https://github.com/SoftEtherVPN/SoftEtherVPN.git
